@@ -150,6 +150,18 @@ pub mod adapter;
 #[cfg(feature = "v1")]
 pub mod v1;
 
+#[cfg(all(
+    feature = "nitro",
+    any(
+        not(target_arch = "wasm32"),
+        target_os = "wasi",
+        all(
+            target_arch = "wasm32",
+            any(feature = "stdweb", feature = "wasm-bindgen")
+        )
+    )
+))]
+mod nitro;
 #[cfg(feature = "serde")]
 mod serde_support;
 #[cfg(feature = "slog")]

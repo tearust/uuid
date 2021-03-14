@@ -75,6 +75,16 @@ version = "0.6"
 optional = true
 version = "2"
 
+[dependencies.nsm-lib]
+optional = true
+git = "https://github.com/aws/aws-nitro-enclaves-nsm-api"
+branch = "main"
+
+[dependencies.nsm-io]
+optional = true
+git = "https://github.com/aws/aws-nitro-enclaves-nsm-api"
+branch = "main"
+
 [dev-dependencies.bincode]
 version = "1.0"
 
@@ -97,6 +107,7 @@ v3 = ["md5"]
 v4 = ["getrandom"]
 v5 = ["sha1"]
 wasm-bindgen = ["getrandom", "getrandom/js"]
+nitro = ["nsm-lib", "nsm-io"]
 
 [target.'cfg(windows)'.dependencies.winapi]
 optional = true
