@@ -5,16 +5,14 @@ impl Uuid {
     /// Creates a random UUID from a nitro enclave instance.
     ///
     pub fn new() -> Uuid {
-        let fd = unsafe { nsm::nsm_lib_init() };
+        let fd = nsm::nsm_lib_init();
 
         let mut bytes = [0u8; 16];
         let mut len = bytes.len();
         let err_code =
             unsafe { nsm::nsm_get_random(fd, bytes.as_mut_ptr(), &mut len) };
 
-        unsafe {
-            nsm::nsm_lib_exit(fd);
-        }
+        nsm::nsm_lib_exit(fd);
 
         match err_code {
             ErrorCode::Success => crate::Builder::from_bytes(bytes)
